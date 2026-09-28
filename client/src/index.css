@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-dark: #111111;
+    --color-charcoal: #181818;
+    --color-ivory: #F5F0E8;
+    --color-cream: #EDE4D4;
+    --color-gold: #C9A45C;
+  }
+
+  body {
+    background-color: var(--color-dark);
+    color: var(--color-ivory);
+    overflow-x: hidden;
+  }
+
+  /* Custom subtle gold scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #111111;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #C9A45C;
+  }
+}
+
+@layer utilities {
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #FFF0D0 0%, #C9A45C 50%, #A6823B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .border-gold-subtle {
+    border-color: rgba(201, 164, 92, 0.2);
+  }
+}

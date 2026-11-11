@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import WhatsAppFloating from '@/components/ui/WhatsAppFloating';
 import Button from '@/components/ui/Button';
 import { Sparkles, ArrowLeft, ArrowRight } from 'lucide-react';
 
@@ -52,7 +51,6 @@ export const SubpagePlaceholder: React.FC<SubpagePlaceholderProps> = ({
       </main>
 
       <Footer />
-      <WhatsAppFloating />
     </div>
   );
 };

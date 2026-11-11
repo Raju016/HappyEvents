@@ -1,0 +1,56 @@
+/* ==========================================================================
+   Services 3D Accordion & Expanding Cards Styles
+   Cinematic Editorial Luxury Event Agency Design
+   ========================================================================== */
+
+.services-accordion-stage {
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+}
+
+.services-accordion-track {
+  display: flex;
+  transform-style: preserve-3d;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.services-accordion-card {
+  transform-style: preserve-3d;
+  will-change: flex, width, transform, filter;
+  transition: flex 650ms cubic-bezier(0.16, 1, 0.3, 1),
+              width 650ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 650ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 450ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 650ms cubic-bezier(0.16, 1, 0.3, 1),
+              filter 650ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Elegant vertical text for compressed cards */
+.services-vertical-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-orientation: mixed;
+}
+
+/* Hide scrollbars cleanly while preserving scrolling & wheel navigation */
+.services-hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.services-hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Active card shimmer border */
+.services-card-active-glow {
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.95),
+              0 0 35px -5px rgba(201, 164, 92, 0.3);
+}
+
+/* Mobile accordion item smooth ease */
+.services-mobile-accordion-content {
+  transition: max-height 500ms cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 400ms ease;
+}

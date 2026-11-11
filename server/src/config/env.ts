@@ -16,9 +16,9 @@ const envSchema = z.object({
   CLOUDINARY_API_KEY: z.string().default('YOUR_CLOUDINARY_API_KEY'),
   CLOUDINARY_API_SECRET: z.string().default('YOUR_CLOUDINARY_API_SECRET'),
   RESEND_API_KEY: z.string().default('re_placeholder'),
-  EMAIL_FROM: z.string().default('MOMENTA Events <events@yourdomain.com>'),
-  ADMIN_EMAIL: z.string().default('admin@yourdomain.com'),
-  WHATSAPP_NUMBER: z.string().default('919876543210'),
+  EMAIL_FROM: z.string().default('Happy Events <onboarding@resend.dev>'),
+  ADMIN_EMAIL: z.string().default('george@happyevents.co'),
+  WHATSAPP_NUMBER: z.string().default('919908683101'),
 });
 
 const parsedEnv = envSchema.safeParse(process.env);

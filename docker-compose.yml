@@ -1,0 +1,42 @@
+# Happy Events: site (nginx) + API (Node), using your hosted Postgres (e.g. Neon).
+#
+#   docker compose up -d --build                      start everything
+#   docker compose --profile tools run --rm migrate   apply database migrations
+#   docker compose logs -f api                        watch the server
+#   docker compose down                               stop
+#
+# Secrets live in server/.env. They are read when the container starts and are never copied into an image.
+
+services:
+  api:
+    build:
+      context: ./server
+      target: runtime
+    env_file: ./server/.env
+    environment:
+      NODE_ENV: production
+      PORT: "5000"
+      TRUST_PROXY: "1"          # one proxy (nginx) sits in front
+    restart: unless-stopped
+    expose:
+      - "5000"                  # reachable by the web container only, not from the internet
+
+  web:
+    build:
+      context: ./client
+      args:
+        VITE_API_URL: /api
+    ports:
+      - "${WEB_PORT:-8080}:8080"   # set WEB_PORT=80 on a real server
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # One-off job, not started by "up". Run it after changing the database schema.
+  migrate:
+    profiles: ["tools"]
+    build:
+      context: ./server
+      target: migrate
+    env_file: ./server/.env

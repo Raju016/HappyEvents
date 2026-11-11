@@ -1,437 +1,321 @@
-﻿# HappyEvents — Premium Event Management Platform
+# HappyEvents – Modern Luxury Event Planning & Production Platform
 
-> A modern luxury event planning and management website built with React 19, TypeScript, Express, Prisma, and PostgreSQL. Features an AI concierge (Aura), cinematic UI, full enquiry pipeline, and a secure admin dashboard.
+> **"Where Every Celebration Becomes a Beautiful Memory."**  
+> Full-service luxury wedding planning, stage decoration, concert production, corporate summits, and bespoke event management.
 
----
-
-## Table of Contents
-
-1. [Project Overview](#1-project-overview)
-2. [Tech Stack](#2-tech-stack)
-3. [Project Structure](#3-project-structure)
-4. [Design System](#4-design-system)
-5. [Event Categories & Services](#5-event-categories--services)
-6. [Pages & Features](#6-pages--features)
-7. [Aura AI Concierge](#7-aura-ai-concierge)
-8. [Database Schema](#8-database-schema)
-9. [API Routes](#9-api-routes)
-10. [Getting Started (Local Dev)](#10-getting-started-local-dev)
-11. [Environment Variables](#11-environment-variables)
-12. [Build & Deployment](#12-build--deployment)
-13. [Docker Deployment](#13-docker-deployment)
-14. [Security & Credentials](#14-security--credentials)
-15. [Contact](#15-contact)
+[![Frontend: React 19](https://img.shields.io/badge/Frontend-React%2019-61DAFB?logo=react&logoColor=white)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/Language-TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Bundler-Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Styling-Tailwind%20CSS-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Backend: Node.js / Express](https://img.shields.io/badge/Backend-Node.js%2022%20%7C%20Express-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Database: Prisma / PostgreSQL](https://img.shields.io/badge/Database-Prisma%20%7C%20PostgreSQL-2D3748?logo=prisma&logoColor=white)](https://www.prisma.io/)
+[![AI: Groq LLaMA 3.3](https://img.shields.io/badge/AI%20Concierge-Groq%20SDK-F55036)](https://groq.com/)
+[![Docker Compose](https://img.shields.io/badge/Deployment-Docker%20Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 
 ---
 
-## 1. Project Overview
+## 1. Executive Summary
 
-**HappyEvents** is a full-stack, production-ready event management platform designed with a modern luxury aesthetic. It enables customers to discover services, explore portfolio events, submit enquiries, interact with the Aura AI concierge, and receive personalised event briefs delivered via WhatsApp.
+**HappyEvents** is an international-grade, modern luxury event planning, stage decoration, and technical production platform. Designed with an editorial aesthetic and built on enterprise full-stack web standards, the platform provides clients with an immersive discovery journey, real-time AI event consultation, bespoke brief generation, and a protected administrative backoffice.
 
-**Core capabilities:**
-- Cinematic homepage with editorial design
-- 16 event service categories
-- Portfolio / event gallery with coverflow carousel
-- Contact & enquiry form with full validation
-- Aura AI concierge powered by Groq
-- Event brief generation and WhatsApp delivery
-- Admin dashboard with role-based access control
-- JWT authentication for admin users
-- Prisma ORM with PostgreSQL (Neon-compatible)
-- Resend transactional email integration
+### Core Capabilities
+* **16 Signature Event Categories:** Full turnkey management for royal weddings, destination mandaps, milestone birthdays, corporate summits, arena concerts, and intimate celebrations.
+* **Aura AI Concierge:** An intelligent conversational assistant powered by Groq LLaMA 3.3 that collects client preferences, recommends services, generates formal event briefs, and pre-fills WhatsApp communication with explicit client consent.
+* **Interactive 3D Depth Carousel:** A custom-engineered Framer Motion coverflow showcasing signature celebrations with fluid physics, touch/drag controls, and accessible keyboard navigation.
+* **Client Inquiry & Proposal Engine:** Multi-step event customizer with Zod schema validation, budget tiers, and server-side notification hooks.
+* **Admin Backoffice & CRM:** Secure JWT-authenticated portal with bcrypt password encryption, inquiry triage, customer management, status trackers, and internal collaboration notes.
+* **Containerized Production Architecture:** Docker multi-stage builds served via Nginx reverse proxy with zero CORS overhead and built-in container health checks.
 
 ---
 
-## 2. Tech Stack
+## 2. Global Design System – Modern Luxury
 
-### Frontend (Client)
-| Technology | Version | Purpose |
-|---|---|---|
-| React | 19 | UI framework |
-| TypeScript | 6 | Type safety |
-| Vite | 8 | Build tool & dev server |
-| Tailwind CSS | 3 | Utility-first styling |
-| Framer Motion | 13 | Animations & transitions |
-| React Router | 7 | Client-side routing |
-| React Hook Form | 7 | Form management |
-| Zod | 4 | Schema validation |
-| TanStack Query | 5 | Server state management |
-| Axios | 1 | HTTP client |
-| Lucide React | 1 | Icon library |
-| OXLint | 1 | Fast JS/TS linter |
+The visual identity follows an editorial luxury philosophy: refined typography, generous negative space, warm organic undertones, and subtle gold accents.
 
-### Backend (Server)
-| Technology | Version | Purpose |
-|---|---|---|
-| Node.js | 20+ | Runtime |
-| Express | 4 | HTTP server |
-| TypeScript | 5 | Type safety |
-| Prisma | 6 | ORM & migrations |
-| PostgreSQL | 15+ | Primary database |
-| Groq SDK | — | Aura AI (LLM provider) |
-| JSON Web Token | — | Admin authentication |
-| Bcrypt | — | Password hashing |
-| Resend | — | Transactional email |
-| Zod | 4 | Server-side validation |
-| Rate limiting | — | API protection |
+### Color Palette
+
+| Token | Hex Value | Role & Usage |
+| :--- | :--- | :--- |
+| **Ivory** | `#F8F5EF` | Primary website background, canvas base |
+| **Warm Cream** | `#EFE8DC` | Alternate sections, soft cards, contrast backdrops |
+| **Champagne Gold** | `#C5A46D` | Primary accent, active states, borders, highlights |
+| **Soft Beige** | `#E9DFD0` | Subtle dividers, muted badges, card borders |
+| **Charcoal** | `#292722` | Primary headings, luxury dark footer, high-contrast buttons |
+| **Warm Taupe** | `#8B7965` | Secondary body text, subheadings, metadata |
+| **Pure White** | `#FFFFFF` | Card surfaces, modals, popovers |
+
+### Typography
+* **Editorial Headings:** `Cormorant Garamond` (Sophisticated serif with high-contrast serifs and italics)
+* **Body & User Interface:** `Outfit` / `Inter` (Contemporary, highly legible geometric sans-serif)
 
 ---
 
-## 3. Project Structure
+## 3. Signature Event Portfolio & Services
+
+HappyEvents covers 16 distinct event categories and full turnkey technical services:
+
+### 16 Signature Event Categories
+1. **Weddings:** Bespoke royal weddings, destination mandaps, and celebratory receptions.
+2. **Engagements:** Intimate candlelit rings, opulent floral backdrops, and cocktail soirées.
+3. **Birthdays:** Milestone 1st birthdays, luxury sweet 16s, and golden jubilee galas.
+4. **Anniversaries:** Silver and golden jubilee celebrations with cinematic vow renewals.
+5. **Corporate Events:** Global summits, executive retreats, and annual shareholder banquets.
+6. **Concerts & Live Shows:** Stadium arena tours, celebrity artist concerts, and music festivals.
+7. **College Events:** University cultural fests, star-studded DJ nights, and collegiate showcases.
+8. **School Events:** Grand annual day celebrations, sports galas, and graduation ceremonies.
+9. **Private Parties:** Luxury villa gatherings, penthouse sundowners, and VIP celebrations.
+10. **Baby Showers:** Pastel dreamscapes, custom floral swings, and heartfelt maternity gatherings.
+11. **Naming Ceremonies:** Traditional cradle ceremonies with sacred decor and familial feasts.
+12. **Cultural Events:** Regional heritage festivals, authentic folk stages, and cultural showcases.
+13. **Religious Events:** Devotional kirtans, temple ceremonies, and spiritual gatherings.
+14. **Award Functions:** Red carpet entries, trophy presentations, and high-impact stage productions.
+15. **Exhibitions & Expos:** Curated art installations, trade shows, and bespoke luxury expos.
+16. **Brand Activations:** Interactive consumer pop-ups, experiential brand zones, and PR setups.
+
+### Turnkey Production Services
+* **Stage & Floral Architecture:** Handcrafted mandaps, imported floral installations, and thematic spatial design.
+* **Intelligent Lighting & Sound:** Moving beams, DMX-controlled filament drops, and concert line-array sound systems.
+* **Cinematography & Drone Production:** 4K cinema cameras, gimbal stabilization, same-day teaser edits, and aerial drone captures.
+* **Gastronomy & Bar Curation:** Live interactive chef stations, artisanal cocktail/mocktail bars, and custom dietary menus.
+* **Celebrity & Artist Procurement:** A-list talent management, rider execution, VIP green rooms, and escort security.
+* **White-Glove Hospitality & RSVP:** Airport reception desks, branded guest luggage tags, and concierge hotlines.
+
+---
+
+## 4. Aura AI Concierge Workflow
+
+Aura serves as HappyEvents' personal AI event planner, integrating Groq LLaMA 3.3 for sub-second, structured reasoning.
+
+```
+       +--------------------------------------------------+
+       |             Client Launches Aura Chat            |
+       +--------------------------------------------------+
+                                |
+                                v
+       +--------------------------------------------------+
+       |   Conversational Q&A & Event Requirement Intake  |
+       |  (Dates, Guests, City, Budget, Floral, Sound)    |
+       +--------------------------------------------------+
+                                |
+                                v
+       +--------------------------------------------------+
+       |        Aura Generates Structured Brief           |
+       +--------------------------------------------------+
+                                |
+                                v
+       +--------------------------------------------------+
+       |   Client Reviews, Edits, and Approves Brief      |
+       +--------------------------------------------------+
+                                |
+                                v
+       +--------------------------------------------------+
+       | Client Clicks "Open WhatsApp" / Copies Message   |
+       |  (Strictly opt-in: no unsolicited transmissions) |
+       +--------------------------------------------------+
+```
+
+### Safety & Privacy Rules
+1. **Zero Credential Exposure:** All Groq API keys remain strictly on the Express backend.
+2. **Explicit Consent:** Messages are never automatically dispatched. The client explicitly reviews the formatted text and approves launching WhatsApp.
+3. **No Fabricated Confirmations:** Aura explicitly communicates that dates, vendor availability, and final quotations are subject to formal team confirmation.
+
+---
+
+## 5. Technology Stack & Architecture
 
 ```
 HappyEvents/
-├── client/                         # React frontend
-│   ├── public/
-│   │   ├── events/                 # Event photography assets
-│   │   └── *.jpg / *.png          # Public images
+├── client/                     # Frontend Application (React 19 + TypeScript + Vite)
+│   ├── public/                 # Static assets, logos, and high-res event photography
 │   ├── src/
-│   │   ├── api/                    # Axios API helpers
+│   │   ├── api/                # Axios API client, auth interceptors, form submitters
 │   │   ├── components/
-│   │   │   ├── admin/              # Admin UI components
-│   │   │   ├── aura/               # Aura concierge UI
-│   │   │   ├── cards/              # Card components
-│   │   │   ├── carousel/           # Coverflow carousel
-│   │   │   ├── forms/              # Reusable form components
-│   │   │   ├── layout/             # Navbar, Footer, ScrollToTop
-│   │   │   ├── testimonials/       # Testimonial components
-│   │   │   └── ui/                 # WhatsAppFloating, Preloader, etc.
-│   │   ├── data/
-│   │   │   ├── siteConfig.ts       # Single source of truth for contact info
-│   │   │   └── mockData.ts
-│   │   ├── pages/                  # Route-level page components
-│   │   │   ├── HomePage.tsx
-│   │   │   ├── AboutPage.tsx
-│   │   │   ├── ServicesPage.tsx
-│   │   │   ├── EventsPage.tsx
-│   │   │   ├── OurWorkPage.tsx
-│   │   │   ├── ContactPage.tsx
-│   │   │   ├── PlanYourEventPage.tsx
-│   │   │   ├── ReviewsPage.tsx
-│   │   │   ├── PrivacyPolicyPage.tsx
-│   │   │   ├── TermsPage.tsx
-│   │   │   └── admin/              # Admin dashboard pages
-│   │   ├── sections/home/          # Homepage section components
-│   │   └── tests/                  # Vitest test files
-│   ├── Dockerfile
-│   ├── nginx.conf
-│   ├── tailwind.config.js
-│   └── package.json
+│   │   │   ├── admin/          # Backoffice dashboard, inquiry drawer, tables, auth context
+│   │   │   ├── aura/           # Aura AI widget, brief cards, WhatsApp formatter
+│   │   │   ├── cards/          # Category cards, review cards, project showcase cards
+│   │   │   ├── carousel/       # 3D Depth Viewport Carousel (Framer Motion)
+│   │   │   ├── forms/          # Floating-label engraved invitation & proposal forms
+│   │   │   ├── layout/         # Sticky Navbar, Footer, ScrollToTop, Subpage headers
+│   │   │   └── ui/             # Reusable Buttons, Modals, SectionHeadings, WhatsApp fab
+│   │   ├── data/               # Single-source-of-truth siteConfig & mockData
+│   │   ├── pages/              # Routed pages (Home, Events, Services, Work, About, Contact, Admin)
+│   │   ├── sections/           # Section blocks composing the Homepage
+│   │   ├── tests/              # Vitest & Testing Library unit test suite
+│   │   ├── App.tsx             # Route declarations & QueryClientProvider setup
+│   │   └── index.css           # Tailwind base, utilities, and global keyframe animations
+│   ├── nginx.conf              # Unprivileged production reverse proxy config
+│   ├── package.json            # Client dependencies & build scripts
+│   └── tailwind.config.js      # Luxury color tokens & typography extension
 │
-├── server/                         # Express backend
+├── server/                     # Backend Application (Node.js 22 + Express + TypeScript)
 │   ├── prisma/
-│   │   ├── schema.prisma           # Full DB schema
-│   │   └── migrations/             # Migration history
-│   ├── scripts/                    # Seed & utility scripts
+│   │   ├── schema.prisma       # Complete relational schema (Admin, Customer, Enquiry, Service, etc.)
+│   │   └── seed.ts             # Database seeding script for development
 │   ├── src/
-│   │   ├── config/
-│   │   │   ├── env.ts              # Zod-validated environment config
-│   │   │   └── groq.ts             # Groq AI client setup
-│   │   ├── middleware/             # Auth, rate limiting, error handling
-│   │   ├── routes/                 # Express route handlers
-│   │   └── services/               # Business logic & integrations
-│   ├── Dockerfile
-│   ├── .env.example                # Reference — no real secrets
-│   └── package.json
+│   │   ├── config/             # Environment validation (Zod), Prisma client, Groq config
+│   │   ├── middleware/         # Helmet, CORS, Rate Limiters, JWT requireAuth, ErrorHandler
+│   │   ├── routes/             # REST endpoints (auth, enquiries, contact, aura, health)
+│   │   ├── services/           # Aura service, admin authentication, mailer, database queries
+│   │   ├── app.ts              # Express application factory
+│   │   └── server.ts           # Server bootstrap & graceful shutdown listeners
+│   ├── Dockerfile              # Multi-stage production container build
+│   └── package.json            # Server dependencies & build scripts
 │
-├── .env.example                    # Root env reference
-├── .gitignore                      # Hardened secret exclusion rules
-├── docker-compose.yml
-├── package.json                    # Root scripts (dev, build, install)
-└── README.md
+├── docker-compose.yml          # Container orchestration (web + api + migrate profile)
+└── README.md                   # Complete architectural documentation
 ```
 
 ---
 
-## 4. Design System
-
-HappyEvents uses a centralised design token system via CSS variables and Tailwind configuration.
-
-### Colour Palette
-
-| Token | Hex | Usage |
-|---|---|---|
-| Ivory | `#F8F5EF` | Main background |
-| Warm Cream | `#EFE8DC` | Secondary sections |
-| Champagne Gold | `#C5A46D` | Primary accent, CTAs |
-| Soft Beige | `#E9DFD0` | Cards |
-| Charcoal | `#292722` | Headings, footer background |
-| Warm Taupe | `#8B7965` | Body text |
-| Pure White | `#FFFFFF` | Card surfaces |
-
-### Typography
-
-| Role | Font |
-|---|---|
-| Display headings | Playfair Display |
-| Body & UI | Inter |
-| Buttons & nav | Inter |
-
----
-
-## 5. Event Categories & Services
-
-HappyEvents offers planning and management across **16 event categories**:
-
-| # | Category | # | Category |
-|---|---|---|---|
-| 1 | Weddings | 9 | Private Parties |
-| 2 | Engagements | 10 | Baby Showers |
-| 3 | Birthdays | 11 | Naming Ceremonies |
-| 4 | Anniversaries | 12 | Cultural Events |
-| 5 | Corporate Events | 13 | Religious Events |
-| 6 | Concerts & Live Shows | 14 | Award Functions |
-| 7 | College Events | 15 | Exhibitions & Expos |
-| 8 | School Events | 16 | Brand Activations |
-
----
-
-## 6. Pages & Features
-
-| Page | Route | Description |
-|---|---|---|
-| Home | `/` | Cinematic hero, services preview, featured events, process, testimonials |
-| About | `/about` | Brand story, mission, vision, values |
-| Services | `/services` | All 16 service categories with enquiry CTAs |
-| Events | `/events` | Portfolio with 3D coverflow carousel |
-| Our Work | `/our-work` | Project gallery with modal viewer |
-| Plan Your Event | `/plan` | Multi-step event customisation form |
-| Contact | `/contact` | Enquiry form + WhatsApp contact |
-| Reviews | `/reviews` | Customer testimonials page |
-| Privacy Policy | `/privacy` | Legal page |
-| Terms | `/terms` | Legal page |
-| Admin Dashboard | `/admin` | RBAC admin panel (SUPER_ADMIN / ADMIN / EDITOR) |
-
-### Key UI Features
-- **CinematicPreloader** — branded loading screen on first visit
-- **WhatsApp floating button** — persistent contact shortcut
-- **ScrollToTop** — automatic scroll reset on route change
-- **Sticky Navbar** — transparent to solid transition on scroll
-- **Aura Concierge** — floating AI chat window
-
----
-
-## 7. Aura AI Concierge
-
-Aura is HappyEvents personal AI event concierge, powered by **Groq** (fast LLM inference).
-
-```
-"Welcome to HappyEvents! I'm Aura, your personal event concierge.
-Let's create something beautiful together. How can I help you plan your special occasion?"
-```
-
-### Aura Flow
-
-```
-User opens Aura chat
-        |
-        v
-Aura greets + shows suggested prompts
-        |
-        v
-User describes event (type, date, guests, budget, theme)
-        |
-        v
-Aura collects details conversationally
-        |
-        v
-Aura generates structured Event Brief
-        |
-        v
-User reviews brief and approves for WhatsApp delivery
-        |
-        v
-Brief sent to HappyEvents team via WhatsApp
-```
-
-### Aura Capabilities
-- Answer FAQs about services and pricing
-- Guide customers through event customisation
-- Collect event type, date, location, guest count, budget
-- Suggest themes, decorations, and vendors
-- Generate a formatted, structured event brief
-- Trigger WhatsApp delivery of the approved brief
-
-### API Endpoint
-```
-POST /api/aura/chat
-Body: { messages: ChatMessage[], sessionId?: string }
-```
-
----
-
-## 8. Database Schema
-
-Built with **Prisma ORM** on **PostgreSQL**. Key models:
-
-| Model | Purpose |
-|---|---|
-| `Admin` | Admin users with role (SUPER_ADMIN / ADMIN / EDITOR) |
-| `Customer` | Registered customers |
-| `EventCategory` | 16 event types with cover images and slugs |
-| `Service` | Service offerings with features list |
-| `Package` | Pricing tiers (Essential, Premium, Luxury, Custom) |
-| `Event` | Portfolio events with gallery, videos, and reviews |
-| `Enquiry` | Customer enquiries with status pipeline |
-| `ContactMessage` | Direct contact form submissions |
-| `Review` | Customer reviews (requires admin approval) |
-| `Testimonial` | Video testimonials |
-| `SiteSetting` | Dynamic site configuration via admin |
-| `AuditLog` | Full admin action audit trail |
-
-### Enquiry Status Pipeline
-```
-NEW -> CONTACTED -> QUOTED -> CONFIRMED -> IN_PROGRESS -> COMPLETED
-                                                       -> CANCELLED
-```
-
----
-
-## 9. API Routes
-
-### Public
-| Method | Route | Description |
-|---|---|---|
-| `GET` | `/api/health` | Server health check |
-| `POST` | `/api/contact` | Submit contact message |
-| `POST` | `/api/enquiry` | Submit event enquiry |
-| `POST` | `/api/aura/chat` | Aura AI conversation |
-
-### Auth
-| Method | Route | Description |
-|---|---|---|
-| `POST` | `/api/auth/login` | Admin login (returns JWT) |
-| `POST` | `/api/auth/logout` | Admin logout |
-
-### Admin (JWT Required)
-| Method | Route | Description |
-|---|---|---|
-| `GET` | `/api/admin/*` | Admin data reads |
-| `POST/PUT/DELETE` | `/api/admin/*` | Admin data mutations |
-
----
-
-## 10. Getting Started (Local Dev)
+## 6. Local Development Setup
 
 ### Prerequisites
-- Node.js 20+
-- npm 10+
-- PostgreSQL 15+ (or a [Neon](https://neon.tech) free-tier account)
+* **Node.js:** v22.x or later
+* **npm:** v10.x or later
+* **PostgreSQL:** Local database or hosted instance (e.g., Neon / Supabase)
+* **Groq API Key:** For Aura AI concierge ([console.groq.com](https://console.groq.com))
 
-### 1. Clone & Install
-
+### 1. Clone & Install Dependencies
 ```bash
-git clone https://github.com/YOUR_USERNAME/HappyEvents.git
-cd HappyEvents
+# Clone the repository
+git clone <repository-url>
+cd HappyEventsCopy
+
+# Install root, client, and server dependencies in one command
 npm run install:all
 ```
 
-### 2. Configure Environment
+### 2. Configure Environment Variables
+Create a `.env` file in the `server` directory (mirroring `.env.example`):
 
 ```bash
-cp .env.example .env
-cp server/.env.example server/.env
+# server/.env
+
+# Database connection string (PostgreSQL)
+DATABASE_URL="postgresql://user:password@host:5432/happyevents?sslmode=require"
+
+# Server configuration
+PORT=5000
+NODE_ENV="development"
+CLIENT_URL="http://localhost:5173"
+
+# JWT Authentication
+JWT_SECRET="supersecretjwtkeyforlocaldevelopmentminimum32chars"
+JWT_EXPIRES_IN="7d"
+
+# Groq AI Service (Aura Concierge)
+GROQ_API_KEY="gsk_your_groq_api_key_here"
+GROQ_MODEL="llama-3.3-70b-versatile"
+GROQ_TIMEOUT_MS=20000
+
+# WhatsApp Integration
+WHATSAPP_NUMBER="919908683101"
+
+# Email Notifications (Resend)
+RESEND_API_KEY="re_placeholder"
+EMAIL_FROM="Happy Events <onboarding@resend.dev>"
+ADMIN_EMAIL="admin@happyevents.co"
 ```
 
-Fill in your real values in `server/.env`.
-
-### 3. Set Up the Database
-
+### 3. Generate Prisma Client & Migrate Database
 ```bash
+# Generate the Prisma Client
 npm run prisma:generate
+
+# Apply pending migrations to your database
 npm run prisma:migrate
+
+# (Optional) Seed the database with initial administrative accounts
 npm run seed
 ```
 
-### 4. Start the Dev Servers
-
+### 4. Run Development Servers
 ```bash
+# Starts both frontend (port 5173) and backend (port 5000) concurrently
 npm run dev
+
+# Or run them individually:
+npm run dev:client   # Starts Vite dev server
+npm run dev:server   # Starts Express tsx watch server
 ```
 
-- Frontend: http://localhost:5173
-- API: http://localhost:5000/api/health
-- Prisma Studio: `npm run prisma:studio`
+The website is accessible at `http://localhost:5173`.  
+The backend health check is accessible at `http://localhost:5000/api/health`.
 
 ---
 
-## 11. Environment Variables
+## 7. Testing, Linting & Production Build
 
-Create `server/.env` based on `server/.env.example`. **Never commit this file.**
-
-```env
-DATABASE_URL="postgresql://user:password@host:5432/happyevents"
-PORT=5000
-NODE_ENV="development"
-JWT_SECRET="your-super-secret-jwt-key-minimum-32-characters"
-JWT_EXPIRES_IN="7d"
-CLIENT_URL="http://localhost:5173"
-GROQ_API_KEY="gsk_your_groq_api_key"
-CLOUDINARY_CLOUD_NAME="your_cloud_name"
-CLOUDINARY_API_KEY="your_api_key"
-CLOUDINARY_API_SECRET="your_api_secret"
-RESEND_API_KEY="re_your_resend_key"
-EMAIL_FROM="HappyEvents <events@yourdomain.com>"
-ADMIN_EMAIL="rajkadiyam9346@gmail.com"
-WHATSAPP_NUMBER="919908683101"
-```
-
----
-
-## 12. Build & Deployment
-
+### Automated Test Suite (Vitest + React Testing Library)
+Run the 53 unit and component tests covering Aura brief formatting, WhatsApp URL normalization, admin authentication, and backoffice enquiry management:
 ```bash
-# Production build (client + server)
-npm run build
+# Run all tests once
+npm test
+# (or: npm run test --prefix client)
 
-# Client output: client/dist/
-# Server output: server/dist/
+# Run tests in interactive watch mode
+npm run test:watch --prefix client
 ```
 
----
-
-## 13. Docker Deployment
-
+### Client Linting & Type Checking
 ```bash
-docker compose up --build
+# Run oxlint across client codebase
+npm run lint
+# (or: npm run lint --prefix client)
+
+# Compile client TypeScript and build production bundle
+npm run build --prefix client
 ```
 
-Services:
-- **client** — Nginx on port 80
-- **server** — Express on port 5000
-- **db** — PostgreSQL on port 5432
+### Server Compilation
+```bash
+# Compile server TypeScript and generate Prisma artifacts
+npm run build --prefix server
+```
 
 ---
 
-## 14. Security & Credentials
+## 8. Docker Deployment
 
-| Protection | Status |
-|---|---|
-| `server/.env` excluded from git | Enforced by .gitignore |
-| No secrets in git history | Verified clean |
-| JWT auth on all admin routes | requireAuth middleware |
-| Password hashing with bcrypt | Enabled |
-| Rate limiting on all public APIs | Enabled |
-| Login brute-force protection | loginRateLimit middleware |
-| Zod validation on all inputs | Client + server |
-| CORS configured | Via CLIENT_URL env var |
-| Audit log for admin actions | AuditLog model |
+The application is fully containerized with multi-stage Docker builds:
+* **`api` Container:** Node 22 slim container running the compiled Express API with Prisma client.
+* **`web` Container:** Nginx unprivileged Alpine container serving static assets and proxying `/api` requests to the internal API container.
 
-**Important:** Never commit `server/.env`. It contains your database URL, JWT secret, and API keys.
+### Deploy with Docker Compose
+```bash
+# Build and start the containers in detached mode
+docker compose up -d --build
+
+# Inspect running containers
+docker compose ps
+
+# View live API logs
+docker compose logs -f api
+
+# View live Web/Nginx logs
+docker compose logs -f web
+
+# Run database migrations inside container environment
+docker compose --profile tools run --rm migrate
+
+# Stop the containers
+docker compose down
+```
+
+* **Web UI:** `http://localhost:8080`
+* **API Health Check:** `http://localhost:8080/api/health`
 
 ---
 
-## 15. Contact
+## 9. Security, Performance & Best Practices
 
-**HappyEvents — Premium Event Planning & Management**
-
-| Channel | Details |
-|---|---|
-| Phone | +91 99086 83101 |
-| Email | rajkadiyam9346@gmail.com |
-| WhatsApp | https://wa.me/919908683101 |
-| Location | Floor 4, Road No. 36, Jubilee Hills, Hyderabad, India |
+1. **Defense in Depth:** Helmet middleware sets secure HTTP response headers (Content-Security-Policy, X-Frame-Options, HSTS).
+2. **Strict Rate Limiting:** Form submissions (`/api/contact`, `/api/enquiries`), login attempts (`/api/auth/login`), and AI chat calls (`/api/aura/chat`) are independently throttled via IP-aware rate limiters.
+3. **Payload Clamping:** Dedicated JSON body size limits protect against memory exhaustion (Aura endpoint capped at 20KB).
+4. **Credential Isolation:** Client bundle contains zero API secrets. All third-party services (Groq, Resend, Neon, Cloudinary) communicate strictly through backend gateways.
+5. **Asset Optimization:** Next-generation WebP/AVIF imagery, responsive image attributes, and lazy loading ensure fast First Contentful Paint (FCP).
 
 ---
 
-> Built with love for HappyEvents. All rights reserved.
+*© 2026 Happy Events & Experiences. All rights reserved.*
+

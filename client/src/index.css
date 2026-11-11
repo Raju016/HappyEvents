@@ -43,4 +43,93 @@
   .border-gold-subtle {
     border-color: rgba(201, 164, 92, 0.2);
   }
+
+  /* Cinematic Animation Utility Classes — keyframes defined at global scope below */
+  .anim-hero-bg {
+    animation: heroFadeIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .anim-hero-zoom {
+    animation: heroZoomIn 1.25s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+  }
+
+  .anim-hero-badge {
+    animation: heroRevealBadge 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+  }
+
+  .anim-hero-heading {
+    animation: heroRevealHeading 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+  }
+
+  .anim-hero-copy {
+    animation: heroRevealCopy 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.42s both;
+  }
+
+  .anim-hero-cta {
+    animation: heroRevealCTA 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.58s both;
+  }
+
+  .anim-hero-footer {
+    animation: heroRevealCopy 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
+  }
+
+  .anim-navbar {
+    animation: heroRevealNav 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both;
+  }
+}
+
+/* ============================================================
+   Cinematic Opening Sequence — Keyframes at GLOBAL scope
+   (Must NOT be inside @layer utilities — Tailwind discards them)
+   ============================================================ */
+
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes heroZoomIn {
+  from { opacity: 0.3; transform: scale(1.08); }
+  to   { opacity: 1;   transform: scale(1.04); }
+}
+
+@keyframes heroRevealBadge {
+  from { opacity: 0; transform: translateY(-14px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0)     scale(1);    }
+}
+
+@keyframes heroRevealHeading {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes heroRevealCopy {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes heroRevealCTA {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes heroRevealNav {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0);     }
+}
+
+/* Reduced-Motion: Keep all content visible, skip animation */
+@media (prefers-reduced-motion: reduce) {
+  .anim-hero-bg,
+  .anim-hero-zoom,
+  .anim-hero-badge,
+  .anim-hero-heading,
+  .anim-hero-copy,
+  .anim-hero-cta,
+  .anim-hero-footer,
+  .anim-navbar {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

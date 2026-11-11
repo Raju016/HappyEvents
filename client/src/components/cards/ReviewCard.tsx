@@ -35,31 +35,43 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
 
       {/* Customer Attribution Footer */}
       <div className="pt-6 mt-6 border-t border-white/5 flex items-center gap-4">
-        <img
-          src={review.customerPhoto}
-          alt={review.customerName}
-          className="w-12 h-12 rounded-full object-cover border border-brand-gold/40"
-          loading="lazy"
-        />
-        <div className="flex-1">
-          <div className="flex items-center gap-2">
-            <h4 className="text-sm font-sans font-semibold text-brand-ivory">
+        {review.customerPhoto ? (
+          <img
+            src={review.customerPhoto}
+            alt={review.customerName}
+            className="w-12 h-12 rounded-full object-cover border border-brand-gold/40"
+            loading="lazy"
+          />
+        ) : (
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-brand-gold/25 to-brand-gold/5 border border-brand-gold/40 flex items-center justify-center text-brand-gold font-serif font-semibold text-sm tracking-wide shrink-0 shadow-inner">
+            {review.customerName
+              .split(' ')
+              .map((n) => n[0])
+              .slice(0, 2)
+              .join('')
+              .toUpperCase()}
+          </div>
+        )}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 flex-wrap">
+            <h4 className="text-sm font-sans font-semibold text-brand-ivory truncate">
               {review.customerName}
             </h4>
-            {review.isDemo && (
-              <span className="text-[9px] font-mono uppercase bg-brand-gold/10 text-brand-gold px-1.5 py-0.5 rounded border border-brand-gold/20">
-                Demo
+            {review.verifiedSource && (
+              <span className="text-[10px] font-sans uppercase bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/20 flex items-center gap-1 font-medium">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" />
+                WedMeGood
               </span>
             )}
           </div>
           {review.role && (
-            <p className="text-xs text-brand-muted font-sans font-light">
+            <p className="text-xs text-brand-muted font-sans font-light truncate">
               {review.role}
             </p>
           )}
-          <div className="flex items-center gap-1 text-[11px] text-brand-gold/90 mt-0.5 font-sans">
-            <MapPin className="w-3 h-3" />
-            <span>{review.eventTitle} • {review.location}</span>
+          <div className="flex items-center gap-1 text-[11px] text-brand-gold/90 mt-0.5 font-sans truncate">
+            <MapPin className="w-3 h-3 shrink-0" />
+            <span className="truncate">{review.eventTitle} • {review.location}</span>
           </div>
         </div>
       </div>

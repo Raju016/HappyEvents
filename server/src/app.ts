@@ -7,6 +7,11 @@ import { errorHandler } from './middleware/errorHandler';
 export const createApp = (): Application => {
   const app = express();
 
+  // Behind nginx or a load balancer, every request arrives from the proxy's address.
+  // Set TRUST_PROXY=1 there so rate limits (login, forms, Aura) see each visitor's real IP.
+  const trustProxy = Number(process.env.TRUST_PROXY ?? 0);
+  if (trustProxy > 0) app.set('trust proxy', trustProxy);
+
   // Security Middleware
   app.use(helmet());
 
@@ -19,6 +24,9 @@ export const createApp = (): Application => {
       allowedHeaders: ['Content-Type', 'Authorization'],
     })
   );
+
+  // Aura chat bodies are tiny: cap them well below the global limit.
+  app.use('/api/aura', express.json({ limit: '20kb' }));
 
   // Body Parsing
   app.use(express.json({ limit: '10mb' }));

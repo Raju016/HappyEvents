@@ -1,7 +1,20 @@
-import { BrowserRouter as Router, Routes, Route, ScrollRestoration } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ScrollToTop from '@/components/layout/ScrollToTop';
 import HomePage from '@/pages/HomePage';
 import SubpagePlaceholder from '@/components/layout/SubpagePlaceholder';
+import OurWorkPage from './pages/OurWorkPage';
+import EventsPage from './pages/EventsPage';
+import ServicesPage from './pages/ServicesPage';
+import ReviewsPage from './pages/ReviewsPage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
+import PlanYourEventPage from './pages/PlanYourEventPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsPage from './pages/TermsPage';
+import AuraConcierge from '@/components/aura/AuraConcierge';
+import AdminRoutes from '@/pages/admin/AdminRoutes';
+
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -16,21 +29,14 @@ export function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
+        <ScrollToTop />
         <Routes>
           {/* Main Homepage Route */}
           <Route path="/" element={<HomePage />} />
 
           {/* Subroutes configured for upcoming Phases */}
-          <Route
-            path="/events"
-            element={
-              <SubpagePlaceholder
-                title="Event Occasions & Formats"
-                category="All Event Categories"
-                description="Explore all 20 event categories we manage from royal weddings and stadium concerts to executive corporate galas."
-              />
-            }
-          />
+          <Route path="/events" element={<EventsPage />} />
+
           <Route
             path="/events/:slug"
             element={
@@ -41,16 +47,10 @@ export function App() {
               />
             }
           />
-          <Route
-            path="/services"
-            element={
-              <SubpagePlaceholder
-                title="Comprehensive Event Services"
-                category="End-to-End Solutions"
-                description="From architectural floral design to line-array sound and celebrity curation, explore our full spectrum of event services."
-              />
-            }
-          />
+
+
+          <Route path="/services" element={<ServicesPage />} />
+
           <Route
             path="/services/:slug"
             element={
@@ -61,16 +61,7 @@ export function App() {
               />
             }
           />
-          <Route
-            path="/work"
-            element={
-              <SubpagePlaceholder
-                title="Moments We've Brought to Life"
-                category="Creative Portfolio"
-                description="Cinematic films, photography showcases, and behind-the-scenes event case studies produced across India."
-              />
-            }
-          />
+          <Route path="/work" element={<OurWorkPage />} />
           <Route
             path="/work/videos"
             element={
@@ -91,76 +82,20 @@ export function App() {
               />
             }
           />
-          <Route
-            path="/reviews"
-            element={
-              <SubpagePlaceholder
-                title="Client Testimonials & Feedback"
-                category="Verified Experiences"
-                description="Read candid reviews and watch video testimonials from families and corporate brands who trusted MOMENTA."
-              />
-            }
-          />
-          <Route
-            path="/about"
-            element={
-              <SubpagePlaceholder
-                title="The MOMENTA Story & Philosophy"
-                category="About Our Agency"
-                description="Our mission, artistic directors, production crew, and commitment to unforgettable celebrations."
-              />
-            }
-          />
-          <Route
-            path="/contact"
-            element={
-              <SubpagePlaceholder
-                title="Contact Our Concierge"
-                category="Get in Touch"
-                description="Direct numbers, office addresses in Hyderabad and Mumbai, and priority concierge lines."
-              />
-            }
-          />
-          <Route
-            path="/plan-your-event"
-            element={
-              <SubpagePlaceholder
-                title="Plan Your Event"
-                category="Bespoke Enquiry Portal"
-                description="Interactive multi-step quotation form to design your customized event blueprint."
-              />
-            }
-          />
-          <Route
-            path="/privacy"
-            element={
-              <SubpagePlaceholder
-                title="Privacy Policy"
-                category="Legal & Security"
-                description="Our commitment to safeguarding client privacy, event security, and confidential data."
-              />
-            }
-          />
-          <Route
-            path="/terms"
-            element={
-              <SubpagePlaceholder
-                title="Terms & Conditions"
-                category="Agreement"
-                description="Standard service contracts, cancellation policies, and operational terms."
-              />
-            }
-          />
-          <Route
-            path="/admin/login"
-            element={
-              <SubpagePlaceholder
-                title="Admin Authentication Portal"
-                category="Secure Access"
-                description="Restricted management access for MOMENTA event directors, production staff, and editors."
-              />
-            }
-          />
+
+          <Route path="/reviews" element={<ReviewsPage />} />
+
+          <Route path="/about" element={<AboutPage />} />
+
+          <Route path="/contact" element={<ContactPage />} />
+
+          <Route path="/plan-your-event" element={<PlanYourEventPage />} />
+
+          <Route path="/privacy" element={<PrivacyPolicyPage />} />
+
+          <Route path="/terms" element={<TermsPage />} />
+
+          <Route path="/admin/*" element={<AdminRoutes />} />
 
           {/* 404 Fallback */}
           <Route
@@ -173,7 +108,10 @@ export function App() {
               />
             }
           />
+
+
         </Routes>
+        <AuraConcierge />
       </Router>
     </QueryClientProvider>
   );
